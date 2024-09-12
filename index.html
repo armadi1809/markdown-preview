@@ -1,0 +1,41 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://unpkg.com/htmx.org@2.0.2"
+      integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ"
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+    <style>
+      .markdown-container {
+        display: flex;
+        flex-direction: column;
+      }
+      .control-buttons {
+        display: flex;
+        justify-content: end;
+        gap: 5px;
+      }
+      #mdwn-inp {
+        min-height: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="markdown-container">
+      <form hx-post="/parsemdwn" hx-target="#htmlpreview" hx-swap="outerHTML">
+        <div class="markdown-container">
+          <label for="mdwn-inp">Enter Markdown Here</label>
+          <textarea id="mdwn-inp" name="markdown"></textarea>
+          <div class="control-buttons">
+            <button id="parsebtn">Preview</button>
+            <button id="clearbtn">Clear</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div id="htmlPreview"></div>
+  </body>
+</html>
