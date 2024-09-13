@@ -7,11 +7,48 @@
       integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ"
       crossorigin="anonymous"
     ></script>
-    <title>Document</title>
+    <title>Markdown Preview</title>
     <style>
+      body {
+        font-family: Arial, sans-serif; /* Set your preferred font family */
+        background-color: #fafafa;
+      }
+      #parsebtn {
+        background-color: black;
+        color: white;
+        padding: 8px;
+        border-radius: 5px;
+        border: none;
+      }
+      #parsebtn:hover {
+        background-color: rgb(56, 52, 52);
+        cursor: pointer;
+      }
+      #clearbtn {
+        background-color: white;
+        color: black;
+        padding: 8px;
+        border-radius: 5px;
+        border: none;
+      }
+      #clearbtn:hover {
+        cursor: pointer;
+        background-color: whitesmoke;
+      }
+      .control-buttons {
+        margin-top: 4px;
+      }
+      .app-container {
+        display: flex;
+        gap: 10px;
+      }
       .markdown-container {
         display: flex;
         flex-direction: column;
+        flex: 1;
+      }
+      .html-container {
+        flex: 1;
       }
       .control-buttons {
         display: flex;
@@ -21,21 +58,33 @@
       #mdwn-inp {
         min-height: 400px;
       }
+      #mdwn-inp:focus {
+        outline: none;
+      }
+      #htmlPreview {
+        background-color: ghostwhite;
+        min-height: 400px;
+      }
     </style>
   </head>
   <body>
-    <div class="markdown-container">
-      <form hx-post="/parsemdwn" hx-target="#htmlpreview" hx-swap="outerHTML">
-        <div class="markdown-container">
-          <label for="mdwn-inp">Enter Markdown Here</label>
-          <textarea id="mdwn-inp" name="markdown"></textarea>
-          <div class="control-buttons">
-            <button id="parsebtn">Preview</button>
-            <button id="clearbtn">Clear</button>
+    <div class="app-container">
+      <div class="markdown-container">
+        <form hx-post="/parsemdwn" hx-target="#htmlpreview" hx-swap="innerHTML">
+          <div class="markdown-container">
+            <label for="mdwn-inp">Markdown</label>
+            <textarea id="mdwn-inp" name="markdown"></textarea>
+            <div class="control-buttons">
+              <button id="parsebtn">Preview</button>
+              <button id="clearbtn">Clear</button>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
+      <div class="html-container">
+        <label for="htmlPreview">Preview</label>
+        <div id="htmlPreview"></div>
+      </div>
     </div>
-    <div id="htmlPreview"></div>
   </body>
 </html>
