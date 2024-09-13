@@ -7,11 +7,26 @@
       integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ"
       crossorigin="anonymous"
     ></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const clearBtn = document.querySelector("#clearbtn");
+        const htmlPreview = document.querySelector("#htmlPreview");
+        clearBtn.addEventListener("click", () => {
+          htmlPreview.textContent = "";
+        });
+      });
+    </script>
     <title>Markdown Preview</title>
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
       body {
         font-family: Arial, sans-serif; /* Set your preferred font family */
         background-color: #fafafa;
+        padding: 0.5rem;
       }
       #parsebtn {
         background-color: black;
@@ -57,26 +72,30 @@
       }
       #mdwn-inp {
         min-height: 400px;
+        padding: 0.5rem;
       }
       #mdwn-inp:focus {
         outline: none;
       }
       #htmlPreview {
         background-color: ghostwhite;
-        min-height: 400px;
+        height: 400px;
+        border: 1px solid black;
+        padding: 0.5rem;
+        overflow: scroll;
       }
     </style>
   </head>
   <body>
     <div class="app-container">
       <div class="markdown-container">
-        <form hx-post="/parsemdwn" hx-target="#htmlpreview" hx-swap="innerHTML">
+        <form hx-post="/parsemdwn" hx-target="#htmlPreview" hx-swap="innerHTML">
           <div class="markdown-container">
             <label for="mdwn-inp">Markdown</label>
             <textarea id="mdwn-inp" name="markdown"></textarea>
             <div class="control-buttons">
               <button id="parsebtn">Preview</button>
-              <button id="clearbtn">Clear</button>
+              <button type="button" id="clearbtn">Clear</button>
             </div>
           </div>
         </form>
