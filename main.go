@@ -38,7 +38,7 @@ func main() {
 
 		w.Write(markdownToHTML(sanitizedInput))
 	})
-	http.ListenAndServe(":3000", nil)
+	http.ListenAndServe(":3001", nil)
 }
 
 func sanitizeInput(input string) string {
